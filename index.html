@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Casablanca Las Vegas Header - WEBP Ready</title>
+  <title>Casablanca Las Vegas Header - Final Polish</title>
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   
@@ -61,7 +61,6 @@
     }
 
     /* ==================== BRANDING (WEBP TEXT & LOGO) ==================== */
-    /* Master wrapper ensures proper centering and stacking */
     .brand-group {
       position: absolute;
       top: 25px;
@@ -83,11 +82,13 @@
     }
     
     .casa-container { right: 50%; margin-right: 105px; }
-    .vegas-container { left: 50%; margin-left: 105px; }
+    
+    /* OPTICAL BALANCE: Vegas sits slightly further right to balance the logo's shadow */
+    .vegas-container { left: 50%; margin-left: 114px; }
 
-    /* The WEBP Images themselves */
+    /* The WEBP Images (Enlarged) */
     .text-img {
-      width: 130px; /* Size for desktop - scales beautifully with 300px source images */
+      width: 145px; 
       height: auto;
       display: block;
       transition: width 0.4s ease;
@@ -104,7 +105,7 @@
     }
 
     .main-logo {
-      width: 190px; /* Bolder size for desktop */
+      width: 190px; 
       height: auto;
       display: block;
       transition: width 0.4s ease;
@@ -130,7 +131,6 @@
       opacity: 1;
     }
     
-    /* Pulled in closer to the larger logo */
     .nav-left { margin-right: 170px; }
     .nav-right { margin-left: 170px; }
 
@@ -151,14 +151,8 @@
     
     .nav-link:hover { color: var(--color_accent); }
 
-    /* Dropdown Arrows */
-    .nav-item.has-dropdown > .nav-link i { 
-      font-size: 12px; 
-      transition: transform 0.3s ease; 
-    }
-    .nav-item.has-dropdown:hover > .nav-link i { 
-      transform: rotate(180deg); 
-    }
+    .nav-item.has-dropdown > .nav-link i { font-size: 12px; transition: transform 0.3s ease; }
+    .nav-item.has-dropdown:hover > .nav-link i { transform: rotate(180deg); }
 
     /* Desktop Dropdown Menus */
     .dropdown-menu {
@@ -214,21 +208,24 @@
     .site-header.scrolling .brand-group { top: 15px; }
     .site-header.scrolling .logo-wrapper { top: -5px; }
     .site-header.scrolling .main-logo { width: 140px; }
-    .site-header.scrolling .text-img { width: 100px; }
+    .site-header.scrolling .text-img { width: 110px; }
 
     /* Mobile Scroll */
     @media (max-width: 1022px) {
-      .site-header.scrolling .nav-bar-container { min-height: 120px; }
-      .site-header.scrolling .brand-group { top: 15px; }
-      .site-header.scrolling .logo-wrapper { top: 40px; }
-      .site-header.scrolling .main-logo { width: 120px; }
+      .site-header.scrolling .nav-bar-container { min-height: 140px; } /* Taller buffer so it doesn't clip */
+      .site-header.scrolling .brand-group { top: 12px; gap: 4px; }
+      .site-header.scrolling .logo-wrapper { top: 45px; }
+      .site-header.scrolling .main-logo { width: 130px; }
+      .site-header.scrolling .text-img { width: 115px; }
     }
     
     /* Ultra Narrow Scroll */
     @media (max-width: 380px) {
-      .site-header.scrolling .nav-bar-container { min-height: 105px; }
-      .site-header.scrolling .logo-wrapper { top: 35px; }
-      .site-header.scrolling .main-logo { width: 100px; }
+      .site-header.scrolling .nav-bar-container { min-height: 125px; }
+      .site-header.scrolling .brand-group { top: 10px; gap: 3px; }
+      .site-header.scrolling .logo-wrapper { top: 40px; }
+      .site-header.scrolling .main-logo { width: 110px; }
+      .site-header.scrolling .text-img { width: 95px; }
     }
 
     /* ==================== RESPONSIVE BREAKPOINTS ==================== */
@@ -238,9 +235,9 @@
       .nav-left { margin-right: 90px; gap: 15px; }
       .nav-right { margin-left: 90px; gap: 15px; }
       .casa-container { margin-right: 95px; }
-      .vegas-container { margin-left: 95px; }
+      .vegas-container { margin-left: 104px; }
       .main-logo { width: 170px; }
-      .text-img { width: 110px; }
+      .text-img { width: 125px; }
     }
 
     /* MOBILE: < 1022px */
@@ -252,25 +249,34 @@
       
       .hamburger-btn { opacity: 1; pointer-events: auto; }
       
-      /* Stack the WEBP Text Images */
-      .casa-container { right: auto; left: 50%; transform: translateX(-50%); margin-right: 0; top: -10px; }
-      .vegas-container { left: 50%; transform: translateX(-50%); margin-left: 0; top: 12px; }
+      /* Flexbox Stack prevents negative top values from clipping text */
+      .brand-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px; /* Spaces the two images naturally */
+        top: 15px;
+      }
+      .casa-container, .vegas-container {
+        position: static;
+        margin: 0;
+        transform: none;
+      }
       
-      .text-img { width: 120px; }
+      .text-img { width: 135px; } /* Enlarged Mobile Size */
       
-      .logo-wrapper { top: 50px; }
+      /* Manual position for Logo below the flex stack */
+      .logo-wrapper { top: 60px; }
       .main-logo { width: 150px; }
     }
 
     /* ULTRA NARROW: 260px - 380px */
     @media (max-width: 380px) {
       .nav-bar-container { min-height: 140px; }
-      .brand-group { top: 20px; }
-      .casa-container { top: -10px; }
-      .vegas-container { top: 8px; }
-      .text-img { width: 90px; }
-      .logo-wrapper { top: 35px; }
-      .main-logo { width: 130px; } 
+      .brand-group { top: 12px; gap: 4px; }
+      .text-img { width: 105px; }
+      .logo-wrapper { top: 50px; }
+      .main-logo { width: 120px; } 
       .hamburger-btn { font-size: 24px; right: 15px; }
     }
 
@@ -317,19 +323,22 @@
       color: var(--color_text);
     }
 
-    /* Mobile Dropdown Logic */
+    /* Mobile Dropdown FIX: Completely overrides desktop sliding behavior */
     .drawer-nav .dropdown-menu {
-      position: static;
-      visibility: visible;
-      opacity: 1;
-      transform: none;
-      background: transparent;
-      border: none;
-      box-shadow: none;
-      display: none; /* Controlled tightly by JS now */
-      padding: 0 0 0 15px;
+      position: static !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      transform: none !important;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      display: none; /* Controlled tightly by JS */
+      padding: 0 0 0 15px !important;
+      margin: 0 !important;
+      transition: none !important; /* Prevents bizarre sliding glitches */
     }
-    .drawer-nav .dropdown-menu.show { display: block; }
+    .drawer-nav .dropdown-menu.show { display: block !important; }
+    
     .drawer-nav .dropdown-link { color: #ccc; border-bottom: none; padding: 12px 0; font-size: 16px; text-transform: none; }
     .drawer-nav .dropdown-link:hover { color: var(--color_accent); padding-left: 10px; }
 
@@ -364,11 +373,11 @@
     <div class="brand-group">
       
       <div class="casa-container">
-        <img src="https://assets.cdn.filesafe.space/E2BEbKIK8SvsJICq4vXY/media/6a1711558c6ee949299e2da0.png" alt="Casablanca" class="text-img">
+        <img src="YOUR_CASABLANCA_WEBP_URL" alt="Casablanca" class="text-img">
       </div>
       
       <div class="vegas-container">
-        <img src="https://assets.cdn.filesafe.space/E2BEbKIK8SvsJICq4vXY/media/6a17115550a5a2a5d2fce6fd.png" class="text-img">
+        <img src="YOUR_LAS_VEGAS_WEBP_URL" alt="Las Vegas" class="text-img">
       </div>
       
       <a href="/" class="logo-wrapper">
@@ -488,13 +497,12 @@
   closeBtn.addEventListener('click', closeDrawer);
   overlay.addEventListener('click', closeDrawer);
 
-  // 3. BULLETPROOF Mobile Dropdown Logic
+  // 3. Mobile Dropdown Logic
   const dropdownToggles = document.querySelectorAll('.drawer-nav .toggle-dropdown');
   dropdownToggles.forEach(toggle => {
     toggle.addEventListener('click', function(e) {
       e.preventDefault();
       
-      // Specifically targets the UL that comes immediately after this specific A tag
       const menu = this.nextElementSibling;
       const icon = this.querySelector('i');
       
