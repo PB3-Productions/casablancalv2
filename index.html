@@ -1,9 +1,9 @@
-DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Casablanca Las Vegas Header - Final Polish</title>
+  <title>Casablanca Las Vegas Header - Perfect Symmetry</title>
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   
@@ -74,21 +74,20 @@ DOCTYPE html>
     }
     .brand-group > * { pointer-events: auto; }
 
-    /* Text Image Containers */
+    /* Text Image Containers (Perfectly Symmetrical Math) */
     .casa-container, .vegas-container {
       position: absolute;
       top: 0;
       transition: all 0.4s ease;
     }
     
-    .casa-container { right: 50%; margin-right: 105px; }
-    
-    /* OPTICAL BALANCE: Vegas sits slightly further right to balance the logo's shadow */
-    .vegas-container { left: 50%; margin-left: 114px; }
+    /* Logo is 190px wide (95px from center). 110px margin leaves exactly 15px padding on both sides */
+    .casa-container { right: 50%; margin-right: 110px; }
+    .vegas-container { left: 50%; margin-left: 110px; }
 
-    /* The WEBP Images (Enlarged) */
+    /* The Images */
     .text-img {
-      width: 145px; 
+      width: 150px; 
       height: auto;
       display: block;
       transition: width 0.4s ease;
@@ -212,7 +211,7 @@ DOCTYPE html>
 
     /* Mobile Scroll */
     @media (max-width: 1022px) {
-      .site-header.scrolling .nav-bar-container { min-height: 140px; } /* Taller buffer so it doesn't clip */
+      .site-header.scrolling .nav-bar-container { min-height: 140px; } 
       .site-header.scrolling .brand-group { top: 12px; gap: 4px; }
       .site-header.scrolling .logo-wrapper { top: 45px; }
       .site-header.scrolling .main-logo { width: 130px; }
@@ -234,10 +233,10 @@ DOCTYPE html>
     @media (max-width: 1300px) {
       .nav-left { margin-right: 90px; gap: 15px; }
       .nav-right { margin-left: 90px; gap: 15px; }
-      .casa-container { margin-right: 95px; }
-      .vegas-container { margin-left: 104px; }
+      .casa-container { margin-right: 100px; }
+      .vegas-container { margin-left: 100px; }
       .main-logo { width: 170px; }
-      .text-img { width: 125px; }
+      .text-img { width: 130px; }
     }
 
     /* MOBILE: < 1022px */
@@ -249,12 +248,12 @@ DOCTYPE html>
       
       .hamburger-btn { opacity: 1; pointer-events: auto; }
       
-      /* Flexbox Stack prevents negative top values from clipping text */
+      /* Flexbox Stack ensures perfect vertical centering and no optical offsets */
       .brand-group {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 5px; /* Spaces the two images naturally */
+        gap: 5px; 
         top: 15px;
       }
       .casa-container, .vegas-container {
@@ -263,9 +262,8 @@ DOCTYPE html>
         transform: none;
       }
       
-      .text-img { width: 135px; } /* Enlarged Mobile Size */
+      .text-img { width: 135px; } 
       
-      /* Manual position for Logo below the flex stack */
       .logo-wrapper { top: 60px; }
       .main-logo { width: 150px; }
     }
@@ -323,7 +321,7 @@ DOCTYPE html>
       color: var(--color_text);
     }
 
-    /* Mobile Dropdown FIX: Completely overrides desktop sliding behavior */
+    /* Strict Mobile Dropdown Control */
     .drawer-nav .dropdown-menu {
       position: static !important;
       visibility: visible !important;
@@ -332,10 +330,10 @@ DOCTYPE html>
       background: transparent !important;
       border: none !important;
       box-shadow: none !important;
-      display: none; /* Controlled tightly by JS */
+      display: none; 
       padding: 0 0 0 15px !important;
       margin: 0 !important;
-      transition: none !important; /* Prevents bizarre sliding glitches */
+      transition: none !important; 
     }
     .drawer-nav .dropdown-menu.show { display: block !important; }
     
