@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Casablanca Las Vegas Header - Final Bulletproof Layout</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <style>
+    /* ==================== ALIBABA SANS IMPORT ==================== */
+    @font-face {
+      font-family: 'Alibaba Sans';
+      src: local('Alibaba Sans'), local('AlibabaSans-Regular');
+    }
+
+    /* ==================== RESET & BASE ==================== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: 'Alibaba Sans', sans-serif; 
+      background: #f4f4f4; 
+      min-height: 200vh;
+    }
+    a { text-decoration: none; }
+
+    /* ==================== COLOR VARIABLES ==================== */
+    :root {
+      --color_bg: #1a1a1a;
+      --color_bg_solid: #111111; 
+      --color_accent: #d4af37; 
+      --color_text: #ffffff;
+      --max_width: 1400px;
+    }
+
+    /* ==================== HEADER WRAPPER ==================== */
+    .site-header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background-color: var(--color_bg);
+      background-image: url('https://assets.cdn.filesafe.space/E2BEbKIK8SvsJICq4vXY/media/6a168ffdebdb915d9a7311b1.webp');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      transition: background-color 0.4s ease, box-shadow 0.4s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    }
+    
+    .site-header.scrolling {
+      background-color: var(--color_bg_solid);
+      background-image: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+    }
+
+    .header-container {
+      max-width: var(--max_width);
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative; 
+    }
+
+    /* ==================== BRANDING SVGS (CSS BACKGROUND METHOD) ==================== */
+    /* This method forces CodePen to render the SVGs by assigning them to hardcoded boxes */
+    .logo-text-group {
+      position: absolute;
+      top: 25px;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 200;
+      pointer-events: none;
+      transition: all 0.4s ease;
+    }
+    
+    .logo-spacer {
+      width: 160px; /* Space for the center shield */
+      transition: all 0.4s ease;
+    }
+
+    /* Hardcoded Divs prevent collapsing */
+    .svg-casa {
+      width: 140px; 
+      height: 18px;
+      background-image: url('https://assets.cdn.filesafe.space/E2BEbKIK8SvsJICq4vXY/media/6a168ce150a5a2a5d2f33aa2.svg');
+      background-size: contain;
+      background-position: right center; /* Anchors text toward the logo */
+      background-repeat: no-repeat;
+      transition: all 0.4s ease;
+    }
+
+    .svg-vegas {
+      width: 110px; 
+      height: 18px;
+      background-image: url('https://assets.cdn.filesafe.space/E2BEbKIK8SvsJICq4vXY/media/6a168ce150a5a2a5d2f33aa1.svg');
+      background-size: contain;
+      background-position: left center; /* Anchors text toward the logo */
+      background-repeat: no-repeat;
+      transition: all 0.4s ease;
+    }
+
+    /* Center Shield Logo */
+    .logo-wrapper {
+      position: absolute;
+      top: 20px; 
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 205;
+      transition: top 0.4s ease;
+    }
+
+    .main-logo {
+      width: 150px; 
+      height: auto;
+      display: block;
+      transition: width 0.4s ease;
+    }
+
+    /* ==================== NAV BAR ==================== */
+    .nav-bar-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding-top: 60px; 
+      padding-bottom: 30px; 
+      transition: padding 0.4s ease, min-height 0.4s ease;
+    }
+
+    .nav-left, .nav-right {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      gap: 30px;
+      transition: opacity 0.4s ease, transform 0.4s ease, margin 0.4s ease;
+      opacity: 1;
+    }
+    
+    /* Huge margins create a physical hole for the 410px wide center branding block */
+    .nav-left { margin-right: 215px; }
+    .nav-right { margin-left: 215px; }
+
+    .nav-item { position: relative; }
+    .nav-link {
+      display: block;
+      padding: 10px 10px;
+      color: var(--color_text);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: color 0.2s ease;
+    }
+    
+    .nav-link:hover { color: var(--color_accent); }
+
+    /* Dropdowns */
+    .nav-item.has-dropdown > .nav-link i { margin-left: 6px; font-size: 12px; transition: transform 0.2s; }
+    .nav-item.has-dropdown:hover > .nav-link i { transform: rotate(180deg); }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translate(-50%, 10px);
+      background: rgba(17, 17, 17, 0.95);
+      border-top: 2px solid var(--color_accent);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.6);
+      list-style: none;
+      min-width: 180px;
+      padding: 10px 0;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+    .nav-item:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+
+    .dropdown-link {
+      display: block;
+      padding: 10px 20px;
+      color: var(--color_text);
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.2s, padding-left 0.2s;
+    }
+    .dropdown-link:hover { color: var(--color_accent); padding-left: 25px; } 
+
+    /* ==================== HAMBURGER BUTTON ==================== */
+    .hamburger-btn {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: var(--color_text);
+      font-size: 28px;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      z-index: 150;
+    }
+
+    /* ==================== SCROLLING EFFECTS ==================== */
+    /* Desktop Scroll Shrink */
+    .site-header.scrolling .nav-bar-container { padding-top: 40px; padding-bottom: 15px; }
+    .site-header.scrolling .logo-wrapper { top: 10px; }
+    .site-header.scrolling .main-logo { width: 125px; }
+    .site-header.scrolling .logo-text-group { top: 15px; }
+    .site-header.scrolling .logo-spacer { width: 140px; }
+    .site-header.scrolling .svg-casa { width: 110px; height: 15px; }
+    .site-header.scrolling .svg-vegas { width: 90px; height: 15px; }
+
+    /* Mobile Scroll Shrink */
+    @media (max-width: 1022px) {
+      .site-header.scrolling .nav-bar-container { min-height: 120px; }
+      .site-header.scrolling .logo-text-group { top: 10px; gap: 4px; }
+      .site-header.scrolling .logo-wrapper { top: 60px; }
+      .site-header.scrolling .main-logo { width: 110px; }
+    }
+    
+    /* Ultra Narrow Scroll Shrink */
+    @media (max-width: 380px) {
+      .site-header.scrolling .nav-bar-container { min-height: 105px; }
+      .site-header.scrolling .logo-wrapper { top: 55px; }
+      .site-header.scrolling .main-logo { width: 95px; }
+    }
+
+    /* ==================== RESPONSIVE BREAKPOINTS ==================== */
+    
+    /* Medium Desktop: Menus squeeze in gracefully */
+    @media (max-width: 1300px) {
+      .nav-left { margin-right: 140px; gap: 15px; }
+      .nav-right { margin-left: 140px; gap: 15px; }
+      .svg-casa { width: 110px; height: 16px; }
+      .svg-vegas { width: 90px; height: 16px; }
+      .logo-spacer { width: 140px; }
+      .main-logo { width: 130px; }
+    }
+
+    /* MOBILE: < 1022px */
+    @media (max-width: 1022px) {
+      .nav-bar-container { min-height: 170px; padding-top: 0; padding-bottom: 0; }
+      
+      /* Hide desktop menus */
+      .nav-left { transform: translateX(-30px); opacity: 0; pointer-events: none; }
+      .nav-right { transform: translateX(30px); opacity: 0; pointer-events: none; }
+      
+      /* Show hamburger */
+      .hamburger-btn { opacity: 1; pointer-events: auto; }
+      
+      /* Transform the Flex row into a Stack */
+      .logo-text-group {
+        flex-direction: column;
+        top: 15px;
+        gap: 6px; 
+      }
+      .logo-spacer { display: none; } 
+      
+      /* Re-center the background images for the stack */
+      .svg-casa { background-position: center; width: 120px; height: 16px; }
+      .svg-vegas { background-position: center; width: 100px; height: 16px; }
+      
+      /* Push the logo underneath the stacked text */
+      .logo-wrapper { top: 75px; }
+      .main-logo { width: 135px; }
+    }
+
+    /* ULTRA NARROW: 260px - 380px */
+    @media (max-width: 380px) {
+      .nav-bar-container { min-height: 140px; }
+      .logo-text-group { top: 12px; gap: 4px; }
+      .svg-casa { width: 100px; height: 14px; }
+      .svg-vegas { width: 85px; height: 14px; }
+      .logo-wrapper { top: 60px; }
+      .main-logo { width: 115px; }
+      .hamburger-btn { font-size: 24px; right: 15px; }
+    }
+
+    /* ==================== MOBILE DRAWER ==================== */
+    .drawer {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 320px;
+      max-width: 85vw;
+      height: 100%;
+      background: var(--color_bg_solid);
+      z-index: 2000;
+      transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      overflow-y: auto;
+      padding: 25px;
+      box-shadow: -5px 0 25px rgba(0,0,0,0.8);
+    }
+    .drawer.open { right: 0; }
+
+    .drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 15px;
+    }
+
+    .drawer-logo { max-width: 110px; height: auto; }
+    .close-btn { background: transparent; border: none; color: var(--color_text); font-size: 32px; cursor: pointer; transition: color 0.2s;}
+    .close-btn:hover { color: var(--color_accent); }
+
+    .drawer-nav .nav-list { list-style: none; flex-direction: column; display: flex; gap: 0; margin: 0; opacity: 1; transform: none;}
+    .drawer-nav .nav-link {
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      justify-content: space-between;
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: none;
+      color: var(--color_text);
+    }
+
+    /* Mobile Dropdown Overrides */
+    .drawer-nav .dropdown-menu {
+      position: static;
+      visibility: visible;
+      opacity: 1;
+      transform: none;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      display: none;
+      padding: 0 0 0 15px;
+    }
+    .drawer-nav .dropdown-menu.show { display: block; }
+    .drawer-nav .dropdown-link { color: #ccc; border-bottom: none; padding: 12px 0; font-size: 16px; }
+    .drawer-nav .dropdown-link:hover { color: var(--color_accent); padding-left: 10px; }
+
+    .drawer-actions { margin-top: 35px; display: flex; flex-direction: column; gap: 15px; text-align: center; }
+    .drawer-actions .phone { color: var(--color_text); font-size: 22px; font-weight: 700; margin-bottom: 10px; transition: color 0.2s; }
+    .drawer-actions .phone:hover { color: var(--color_accent); }
+
+    .btn-action { 
+      display: block; width: 100%; padding: 14px 20px; border-radius: 5px;
+      background-color: var(--color_text); color: var(--color_bg_solid);
+      font-weight: 700; font-size: 16px; transition: background-color 0.2s, color 0.2s;
+      border: 2px solid var(--color_text);
+    }
+    .btn-action.dark { background-color: transparent; color: var(--color_text); }
+    .btn-action:hover { background-color: var(--color_accent); border-color: var(--color_accent); color: var(--color_bg_solid); }
+
+    .overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8);
+      z-index: 1500; opacity: 0; visibility: hidden; transition: all 0.4s ease;
+    }
+    .overlay.active { opacity: 1; visibility: visible; }
+    
+    main { padding-top: 220px; } 
+
+  </style>
+</head>
+<body>
+
+<header id="site-header" class="site-header">
+  <div class="header-container">
+    
+    <div class="logo-text-group">
+      <div class="svg-casa"></div>
+      <div class="logo-spacer"></div>
+      <div class="svg-vegas"></div>
+    </div>
+    
+    <a href="/" class="logo-wrapper">
+      <img src="https://assets.cdn.filesafe.space/E2BEbKIK8SvsJICq4vXY/media/6a168b71ab53822e7e031366.png" alt="Casablanca Las Vegas Logo" class="main-logo">
+    </a>
+
+    <div class="nav-bar-container">
+      
+      <ul class="nav-left">
+        <li class="nav-item"><a href="#" class="nav-link">Welcome</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Amenities</a></li>
+        <li class="nav-item has-dropdown">
+          <a href="#" class="nav-link">TOUR <i class="fas fa-chevron-down"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="#" class="dropdown-link">Video Tour</a></li>
+            <li><a href="#" class="dropdown-link">3D Tour</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a href="#" class="nav-link">Gallery</a></li>
+      </ul>
+
+      <ul class="nav-right">
+        <li class="nav-item"><a href="#" class="nav-link">Availability</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
+        <li class="nav-item has-dropdown">
+          <a href="#" class="nav-link">CONTACT <i class="fas fa-chevron-down"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="tel:8888888888" class="dropdown-link">Phone</a></li>
+            <li><a href="mailto:sales@example.com" class="dropdown-link">Email</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
+      </ul>
+
+      <button id="hamburger-btn" class="hamburger-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+
+    </div>
+  </div>
+</header>
+
+<div id="drawer" class="drawer">
+  <div class="drawer-header">
+    <img src="https://assets.cdn.filesafe.space/E2BEbKIK8SvsJICq4vXY/media/6a168b71ab53822e7e031366.png" alt="Casablanca Las Vegas Logo" class="drawer-logo">
+    <button id="close-drawer" class="close-btn"><i class="fas fa-times"></i></button>
+  </div>
+  
+  <nav class="drawer-nav">
+    <ul class="nav-list">
+      <li class="nav-item"><a href="#" class="nav-link">Welcome</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">Amenities</a></li>
+      <li class="nav-item has-dropdown">
+        <a href="#" class="nav-link toggle-dropdown">TOUR <i class="fas fa-chevron-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="#" class="dropdown-link">Video Tour</a></li>
+          <li><a href="#" class="dropdown-link">3D Tour</a></li>
+        </ul>
+      </li>
+      <li class="nav-item"><a href="#" class="nav-link">Gallery</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">Availability</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
+      <li class="nav-item has-dropdown">
+        <a href="#" class="nav-link toggle-dropdown">CONTACT <i class="fas fa-chevron-down"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="tel:8888888888" class="dropdown-link">Phone</a></li>
+          <li><a href="mailto:sales@example.com" class="dropdown-link">Email</a></li>
+        </ul>
+      </li>
+      <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
+    </ul>
+  </nav>
+  
+  <div class="drawer-actions">
+    <a href="tel:8888888888" class="phone">(888) 888 - 8888</a>
+    <a href="#" class="btn-action">Check Availability</a>
+    <a href="mailto:sales@example.com" class="btn-action dark">Email Sales Agent</a> 
+  </div>
+</div>
+
+<div id="overlay" class="overlay"></div>
+
+<main>
+  </main>
+
+<script>
+  // 1. Sticky Header Functionality
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) {
+      header.classList.add('scrolling');
+    } else {
+      header.classList.remove('scrolling');
+    }
+  });
+
+  // 2. Mobile Drawer Toggles
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+  const closeBtn = document.getElementById('close-drawer');
+  const drawer = document.getElementById('drawer');
+  const overlay = document.getElementById('overlay');
+
+  function openDrawer() {
+    drawer.classList.add('open');
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden'; 
+  }
+
+  function closeDrawer() {
+    drawer.classList.remove('open');
+    overlay.classList.remove('active');
+    document.body.style.overflow = ''; 
+  }
+
+  hamburgerBtn.addEventListener('click', openDrawer);
+  closeBtn.addEventListener('click', closeDrawer);
+  overlay.addEventListener('click', closeDrawer);
+
+  // 3. Mobile Dropdown Accordion
+  const dropdownToggles = document.querySelectorAll('.toggle-dropdown');
+  dropdownToggles.forEach(toggle => {
+    toggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      const dropdownMenu = this.nextElementSibling;
+      const icon = this.querySelector('i');
+      
+      dropdownMenu.classList.toggle('show');
+      if (dropdownMenu.classList.contains('show')) {
+        icon.style.transform = 'rotate(180deg)';
+      } else {
+        icon.style.transform = 'rotate(0deg)';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
