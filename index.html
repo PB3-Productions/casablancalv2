@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Casablanca Las Vegas Header - Final Bulletproof Layout</title>
+  <title>Casablanca Las Vegas Header - Polished</title>
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   
@@ -60,51 +60,38 @@
       position: relative; 
     }
 
-    /* ==================== BRANDING SVGS (CSS BACKGROUND METHOD) ==================== */
-    /* This method forces CodePen to render the SVGs by assigning them to hardcoded boxes */
-    .logo-text-group {
+    /* ==================== BRANDING SVGS & LOGO ==================== */
+    /* Master wrapper to ensure everything moves together without breaking */
+    .brand-group {
       position: absolute;
       top: 25px;
-      left: 0;
+      left: 50%;
+      transform: translateX(-50%);
       width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      max-width: 500px;
       z-index: 200;
-      pointer-events: none;
+      pointer-events: none; /* Let clicks pass through empty space */
+      transition: top 0.4s ease;
+    }
+    .brand-group > * { pointer-events: auto; }
+
+    /* SVG Containers (Guarantees they never collapse) */
+    .casa-container, .vegas-container {
+      position: absolute;
+      top: 0;
       transition: all 0.4s ease;
     }
     
-    .logo-spacer {
-      width: 160px; /* Space for the center shield */
-      transition: all 0.4s ease;
-    }
+    .casa-container { right: 50%; margin-right: 100px; }
+    .vegas-container { left: 50%; margin-left: 100px; }
 
-    /* Hardcoded Divs prevent collapsing */
-    .svg-casa {
-      width: 140px; 
-      height: 18px;
-      background-image: url('https://assets.cdn.filesafe.space/E2BEbKIK8SvsJICq4vXY/media/6a168ce150a5a2a5d2f33aa2.svg');
-      background-size: contain;
-      background-position: right center; /* Anchors text toward the logo */
-      background-repeat: no-repeat;
-      transition: all 0.4s ease;
-    }
-
-    .svg-vegas {
-      width: 110px; 
-      height: 18px;
-      background-image: url('https://assets.cdn.filesafe.space/E2BEbKIK8SvsJICq4vXY/media/6a168ce150a5a2a5d2f33aa1.svg');
-      background-size: contain;
-      background-position: left center; /* Anchors text toward the logo */
-      background-repeat: no-repeat;
-      transition: all 0.4s ease;
-    }
+    .casa-container img { height: 18px; width: auto; display: block; }
+    .vegas-container img { height: 18px; width: auto; display: block; }
 
     /* Center Shield Logo */
     .logo-wrapper {
       position: absolute;
-      top: 20px; 
+      top: -15px; /* Adjust overhang */
       left: 50%;
       transform: translateX(-50%);
       z-index: 205;
@@ -112,7 +99,7 @@
     }
 
     .main-logo {
-      width: 150px; 
+      width: 180px; /* Big, prominent base size */
       height: auto;
       display: block;
       transition: width 0.4s ease;
@@ -124,8 +111,8 @@
       justify-content: center;
       align-items: center;
       width: 100%;
-      padding-top: 60px; 
-      padding-bottom: 30px; 
+      padding-top: 55px; 
+      padding-bottom: 25px; 
       transition: padding 0.4s ease, min-height 0.4s ease;
     }
 
@@ -138,13 +125,16 @@
       opacity: 1;
     }
     
-    /* Huge margins create a physical hole for the 410px wide center branding block */
-    .nav-left { margin-right: 215px; }
-    .nav-right { margin-left: 215px; }
+    /* Pulled in closer to the logo */
+    .nav-left { margin-right: 120px; }
+    .nav-right { margin-left: 120px; }
 
     .nav-item { position: relative; }
+    
     .nav-link {
-      display: block;
+      display: flex; /* CRITICAL: Forces text and arrow on same line */
+      align-items: center;
+      gap: 8px; /* Space between text and arrow */
       padding: 10px 10px;
       color: var(--color_text);
       font-weight: 700;
@@ -156,10 +146,16 @@
     
     .nav-link:hover { color: var(--color_accent); }
 
-    /* Dropdowns */
-    .nav-item.has-dropdown > .nav-link i { margin-left: 6px; font-size: 12px; transition: transform 0.2s; }
-    .nav-item.has-dropdown:hover > .nav-link i { transform: rotate(180deg); }
+    /* Dropdown Arrows */
+    .nav-item.has-dropdown > .nav-link i { 
+      font-size: 12px; 
+      transition: transform 0.3s ease; 
+    }
+    .nav-item.has-dropdown:hover > .nav-link i { 
+      transform: rotate(180deg); 
+    }
 
+    /* Dropdown Menus */
     .dropdown-menu {
       position: absolute;
       top: 100%;
@@ -209,39 +205,37 @@
 
     /* ==================== SCROLLING EFFECTS ==================== */
     /* Desktop Scroll Shrink */
-    .site-header.scrolling .nav-bar-container { padding-top: 40px; padding-bottom: 15px; }
-    .site-header.scrolling .logo-wrapper { top: 10px; }
-    .site-header.scrolling .main-logo { width: 125px; }
-    .site-header.scrolling .logo-text-group { top: 15px; }
-    .site-header.scrolling .logo-spacer { width: 140px; }
-    .site-header.scrolling .svg-casa { width: 110px; height: 15px; }
-    .site-header.scrolling .svg-vegas { width: 90px; height: 15px; }
+    .site-header.scrolling .nav-bar-container { padding-top: 35px; padding-bottom: 15px; }
+    .site-header.scrolling .brand-group { top: 15px; }
+    .site-header.scrolling .logo-wrapper { top: -5px; }
+    .site-header.scrolling .main-logo { width: 140px; }
+    .site-header.scrolling .casa-container img,
+    .site-header.scrolling .vegas-container img { height: 15px; }
 
     /* Mobile Scroll Shrink */
     @media (max-width: 1022px) {
       .site-header.scrolling .nav-bar-container { min-height: 120px; }
-      .site-header.scrolling .logo-text-group { top: 10px; gap: 4px; }
-      .site-header.scrolling .logo-wrapper { top: 60px; }
-      .site-header.scrolling .main-logo { width: 110px; }
+      .site-header.scrolling .brand-group { top: 15px; }
+      .site-header.scrolling .logo-wrapper { top: 40px; }
+      .site-header.scrolling .main-logo { width: 120px; }
     }
     
     /* Ultra Narrow Scroll Shrink */
     @media (max-width: 380px) {
       .site-header.scrolling .nav-bar-container { min-height: 105px; }
-      .site-header.scrolling .logo-wrapper { top: 55px; }
-      .site-header.scrolling .main-logo { width: 95px; }
+      .site-header.scrolling .logo-wrapper { top: 35px; }
+      .site-header.scrolling .main-logo { width: 100px; }
     }
 
     /* ==================== RESPONSIVE BREAKPOINTS ==================== */
     
-    /* Medium Desktop: Menus squeeze in gracefully */
+    /* Medium Desktop: Menus squeeze in to prevent overlapping */
     @media (max-width: 1300px) {
-      .nav-left { margin-right: 140px; gap: 15px; }
-      .nav-right { margin-left: 140px; gap: 15px; }
-      .svg-casa { width: 110px; height: 16px; }
-      .svg-vegas { width: 90px; height: 16px; }
-      .logo-spacer { width: 140px; }
-      .main-logo { width: 130px; }
+      .nav-left { margin-right: 90px; gap: 15px; }
+      .nav-right { margin-left: 90px; gap: 15px; }
+      .casa-container { margin-right: 85px; }
+      .vegas-container { margin-left: 85px; }
+      .main-logo { width: 160px; }
     }
 
     /* MOBILE: < 1022px */
@@ -255,31 +249,26 @@
       /* Show hamburger */
       .hamburger-btn { opacity: 1; pointer-events: auto; }
       
-      /* Transform the Flex row into a Stack */
-      .logo-text-group {
-        flex-direction: column;
-        top: 15px;
-        gap: 6px; 
-      }
-      .logo-spacer { display: none; } 
+      /* Stack the SVGs in the center */
+      .casa-container { right: auto; left: 50%; transform: translateX(-50%); margin-right: 0; top: -10px; }
+      .vegas-container { left: 50%; transform: translateX(-50%); margin-left: 0; top: 12px; }
       
-      /* Re-center the background images for the stack */
-      .svg-casa { background-position: center; width: 120px; height: 16px; }
-      .svg-vegas { background-position: center; width: 100px; height: 16px; }
+      .casa-container img, .vegas-container img { height: 16px; }
       
-      /* Push the logo underneath the stacked text */
-      .logo-wrapper { top: 75px; }
-      .main-logo { width: 135px; }
+      /* Push the logo underneath the stacked SVGs */
+      .logo-wrapper { top: 50px; }
+      .main-logo { width: 150px; }
     }
 
     /* ULTRA NARROW: 260px - 380px */
     @media (max-width: 380px) {
       .nav-bar-container { min-height: 140px; }
-      .logo-text-group { top: 12px; gap: 4px; }
-      .svg-casa { width: 100px; height: 14px; }
-      .svg-vegas { width: 85px; height: 14px; }
-      .logo-wrapper { top: 60px; }
-      .main-logo { width: 115px; }
+      .brand-group { top: 20px; }
+      .casa-container { top: -10px; }
+      .vegas-container { top: 8px; }
+      .casa-container img, .vegas-container img { height: 14px; }
+      .logo-wrapper { top: 35px; }
+      .main-logo { width: 130px; } /* Ensures it remains large but safe */
       .hamburger-btn { font-size: 24px; right: 15px; }
     }
 
@@ -314,6 +303,7 @@
     .close-btn:hover { color: var(--color_accent); }
 
     .drawer-nav .nav-list { list-style: none; flex-direction: column; display: flex; gap: 0; margin: 0; opacity: 1; transform: none;}
+    
     .drawer-nav .nav-link {
       padding: 16px 0;
       border-bottom: 1px solid rgba(255,255,255,0.05);
@@ -321,7 +311,7 @@
       justify-content: space-between;
       font-size: 18px;
       font-weight: 700;
-      text-transform: none;
+      text-transform: none; /* Keeps it Title Case as written in HTML */
       color: var(--color_text);
     }
 
@@ -338,7 +328,7 @@
       padding: 0 0 0 15px;
     }
     .drawer-nav .dropdown-menu.show { display: block; }
-    .drawer-nav .dropdown-link { color: #ccc; border-bottom: none; padding: 12px 0; font-size: 16px; }
+    .drawer-nav .dropdown-link { color: #ccc; border-bottom: none; padding: 12px 0; font-size: 16px; text-transform: none; }
     .drawer-nav .dropdown-link:hover { color: var(--color_accent); padding-left: 10px; }
 
     .drawer-actions { margin-top: 35px; display: flex; flex-direction: column; gap: 15px; text-align: center; }
@@ -369,15 +359,18 @@
 <header id="site-header" class="site-header">
   <div class="header-container">
     
-    <div class="logo-text-group">
-      <div class="svg-casa"></div>
-      <div class="logo-spacer"></div>
-      <div class="svg-vegas"></div>
+    <div class="brand-group">
+      <div class="casa-container">
+        <img src="https://assets.cdn.filesafe.space/E2BEbKIK8SvsJICq4vXY/media/6a168ce150a5a2a5d2f33aa2.svg" alt="Casablanca">
+      </div>
+      <div class="vegas-container">
+        <img src="https://assets.cdn.filesafe.space/E2BEbKIK8SvsJICq4vXY/media/6a168ce150a5a2a5d2f33aa1.svg" alt="Las Vegas">
+      </div>
+      
+      <a href="/" class="logo-wrapper">
+        <img src="https://assets.cdn.filesafe.space/E2BEbKIK8SvsJICq4vXY/media/6a168b71ab53822e7e031366.png" alt="Casablanca Las Vegas Logo" class="main-logo">
+      </a>
     </div>
-    
-    <a href="/" class="logo-wrapper">
-      <img src="https://assets.cdn.filesafe.space/E2BEbKIK8SvsJICq4vXY/media/6a168b71ab53822e7e031366.png" alt="Casablanca Las Vegas Logo" class="main-logo">
-    </a>
 
     <div class="nav-bar-container">
       
@@ -385,7 +378,7 @@
         <li class="nav-item"><a href="#" class="nav-link">Welcome</a></li>
         <li class="nav-item"><a href="#" class="nav-link">Amenities</a></li>
         <li class="nav-item has-dropdown">
-          <a href="#" class="nav-link">TOUR <i class="fas fa-chevron-down"></i></a>
+          <a href="#" class="nav-link">Tours <i class="fas fa-chevron-down"></i></a>
           <ul class="dropdown-menu">
             <li><a href="#" class="dropdown-link">Video Tour</a></li>
             <li><a href="#" class="dropdown-link">3D Tour</a></li>
@@ -398,7 +391,7 @@
         <li class="nav-item"><a href="#" class="nav-link">Availability</a></li>
         <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
         <li class="nav-item has-dropdown">
-          <a href="#" class="nav-link">CONTACT <i class="fas fa-chevron-down"></i></a>
+          <a href="#" class="nav-link">Contact <i class="fas fa-chevron-down"></i></a>
           <ul class="dropdown-menu">
             <li><a href="tel:8888888888" class="dropdown-link">Phone</a></li>
             <li><a href="mailto:sales@example.com" class="dropdown-link">Email</a></li>
@@ -426,7 +419,7 @@
       <li class="nav-item"><a href="#" class="nav-link">Welcome</a></li>
       <li class="nav-item"><a href="#" class="nav-link">Amenities</a></li>
       <li class="nav-item has-dropdown">
-        <a href="#" class="nav-link toggle-dropdown">TOUR <i class="fas fa-chevron-down"></i></a>
+        <a href="#" class="nav-link toggle-dropdown">Tours <i class="fas fa-chevron-down"></i></a>
         <ul class="dropdown-menu">
           <li><a href="#" class="dropdown-link">Video Tour</a></li>
           <li><a href="#" class="dropdown-link">3D Tour</a></li>
@@ -436,7 +429,7 @@
       <li class="nav-item"><a href="#" class="nav-link">Availability</a></li>
       <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
       <li class="nav-item has-dropdown">
-        <a href="#" class="nav-link toggle-dropdown">CONTACT <i class="fas fa-chevron-down"></i></a>
+        <a href="#" class="nav-link toggle-dropdown">Contact <i class="fas fa-chevron-down"></i></a>
         <ul class="dropdown-menu">
           <li><a href="tel:8888888888" class="dropdown-link">Phone</a></li>
           <li><a href="mailto:sales@example.com" class="dropdown-link">Email</a></li>
@@ -491,12 +484,15 @@
   closeBtn.addEventListener('click', closeDrawer);
   overlay.addEventListener('click', closeDrawer);
 
-  // 3. Mobile Dropdown Accordion
-  const dropdownToggles = document.querySelectorAll('.toggle-dropdown');
+  // 3. REWRITTEN: Mobile Dropdown Accordion (Fixes incorrect targeting)
+  const dropdownToggles = document.querySelectorAll('.drawer-nav .toggle-dropdown');
   dropdownToggles.forEach(toggle => {
     toggle.addEventListener('click', function(e) {
       e.preventDefault();
-      const dropdownMenu = this.nextElementSibling;
+      
+      // Specifically target the menu inside the same list item
+      const parentItem = this.closest('.nav-item');
+      const dropdownMenu = parentItem.querySelector('.dropdown-menu');
       const icon = this.querySelector('i');
       
       dropdownMenu.classList.toggle('show');
